@@ -1,0 +1,110 @@
+[root@cluster1node1 pki]# keytool -genkeypair -alias $(hostname -f)-server -keyalg RSA -keystore /opt/cloudera/security/pki/$(hostname -f)-server.jks -keysize 2048 -dname "CN=$(hostname -f),OU=Engineering,O=Compwire,L=Curitiba,ST=Parana,C=BR" -storepass password -keypass password
+[root@cluster1node1 pki]#
+[root@cluster1node1 pki]#
+[root@cluster1node1 pki]#
+[root@cluster1node1 pki]# ls -l
+total 4
+-rw-r--r--. 1 root root 2299 Apr  5 15:59 cluster1node1.lab.local-server.jks
+[root@cluster1node1 pki]#
+
+
+
+[root@cluster1node1 pki]# keytool -certreq -alias $(hostname -f)-server -keystore /opt/cloudera/security/pki/$(hostname -f)-server.jks -file /opt/cloudera/security/pki/$(hostname -f)-server.csr -storepass password -keypass password
+[root@cluster1node1 pki]#
+[root@cluster1node1 pki]#
+[root@cluster1node1 pki]# ls
+cluster1node1.lab.local-server.csr  cluster1node1.lab.local-server.jks
+[root@cluster1node1 pki]#
+
+
+[root@cluster1node1 etc]# kdb5_util create -s
+Loading random data
+Initializing database '/var/kerberos/krb5kdc/principal' for realm 'LAB.LOCAL',
+master key name 'K/M@LAB.LOCAL'
+You will be prompted for the database Master Password.
+It is important that you NOT FORGET this password.
+Enter KDC database master key:
+Re-enter KDC database master key to verify:
+[root@cluster1node1 etc]#
+
+
+
+
+export JAVA_HOME=/usr/java/jdk1.7.0_67-cloudera
+export PATH=$JAVA_HOME/bin:$PATH
+
+keytool --genkeypair --keystore $(hostname -f).jks --keyalg RSA --alias $(hostname -f) --dname "cn=$(hostname -f)" --storepass password --keypass password --validity 9999 
+
+keytool -exportcert -keystore $(hostname -f).jks -alias $(hostname -f) -storepass password -file $(hostname -f).cer
+ 
+keytool -importkeystore -srckeystore $(hostname -f).jks -srcstorepass password -srckeypass password -destkeystore $(hostname -f).p12 -deststoretype PKCS12 -srcalias $(hostname -f) -deststorepass password -destkeypass password
+
+openssl pkcs12 -in $(hostname -f).p12 -passin pass:password  -passout pass:password -out $(hostname -f).pem
+
+
+passw0rd
+
+passw0rd
+
+keytool -importcert -alias cluster1node1.lab.local -keystore $JAVA_HOME/jssecacerts -file cluster1node1.lab.local.cer -storepass password
+
+
+keytool -importcert -alias cluster1node1.lab.local -keystore $JAVA_HOME/jssecacerts -file cluster1node1.lab.local.cer -storepass password
+
+keytool -importcert -alias cluster1node2.lab.local -keystore $JAVA_HOME/jssecacerts -file cluster1node2.lab.local.cer -storepass password
+
+keytool -importcert -alias cluster1node3.lab.local -keystore $JAVA_HOME/jssecacerts -file cluster1node3.lab.local.cer -storepass password
+
+keytool -importcert -alias cluster1node4.lab.local -keystore $JAVA_HOME/jssecacerts -file cluster1node4.lab.local.cer -storepass password
+
+keytool -importcert -alias cluster1node5.lab.local -keystore $JAVA_HOME/jssecacerts -file cluster1node5.lab.local.cer -storepass password
+
+
+update CONFIGS SET VALUE ='false' WHERE ATTR ='web_tls';
+
+
+update CONFIGS SET VALUE ='false' WHERE ATTR ='need_agent_validation';
+
+
+update CONFIGS SET VALUE ='false' WHERE ATTR ='agent_tls';
+
+
+select ATTR, VALUE from CONFIGS;
+
+
+select ATTR, VALUE from CONFIGS; select ATTR, VALUE from CONFIGS;
+
+
+
+
+[root@cluster1node1 krb5kdc]# kadmin.local
+Authenticating as principal root/admin@LAB.LOCAL with password.
+kadmin.local:  addprinc -pw password cloudera-scm/admin@LAB.LOCAL
+WARNING: no policy specified for cloudera-scm/admin@LAB.LOCAL; defaulting to no policy
+Principal "cloudera-scm/admin@LAB.LOCAL" created.
+kadmin.local:  exit
+
+
+KINIT
+
+[root@cluster1node1 krb5kdc]# kinit evertonlf/admin@LAB.LOCAL
+Password for evertonlf/admin@LAB.LOCAL:
+[root@cluster1node1 krb5kdc]#
+
+
+
+
+
+
+Enable Sentry Synchronization
+ 
+There must be exactly one Sentry service dependent on HDFS when HDFS/Sentry synchronization is enabled, but 0 dependent Sentry services are present.
+
+
+
+
+
+groupadd selector
+groupadd inserters
+useradd -u 1100 -g selector george
+useradd -u 1200 -g inserters ferdinand

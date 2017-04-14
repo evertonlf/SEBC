@@ -564,7 +564,8 @@ Configuring repos
 [root@cluster1node1 ~]#
 [root@cluster1node1 ~]#
 [root@cluster1node1 ~]#
-[root@cluster1node1 ~]# cat cloudera-manager.repo
+[root@cluster1node1 ~]# cat 
+
 [cloudera-manager]
 # Packages for Cloudera Manager, Version 5, on RedHat or CentOS 7 x86_64             
 name=Cloudera Manager

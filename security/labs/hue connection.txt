@@ -1,0 +1,23 @@
+
+[root@cluster1node1 bin]# export HUE_CONF_DIR="/var/run/cloudera-scm-agent/process/678-hue-HUE_SERVER"
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]# export JAVA_HOME=/usr/java/jdk1.7.0_67-cloudera
+[root@cluster1node1 bin]# export PATH=$JAVA_HOME/bin:$PATH
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]# export HUE_SECRET_KEY=password
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]# export HUE_DATABASE_PASSWORD=password
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]# export HUE_IGNORE_PASSWORD_SCRIPT_ERRORS=1
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]# /opt/cloudera/parcels/CDH/lib/hue/build/env/bin/hue useradmin_sync_with_unix
+[root@cluster1node1 bin]#
+[root@cluster1node1 bin]#
+
+
+
+
